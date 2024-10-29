@@ -11,6 +11,18 @@ cd yay-bin
 makepkg -si
 ```
 
+### Install Hyprland Dependencies
+```bash
+yay -S aquamarine gdb hyprcursor hyprlang hyprutils-git hyprwayland-scanner libdisplay-info libfixes libinput libliftoff libxcb libxcomposite libxkbcommon libxrender meson ninja pango pixman seatd tomlplusplus wayland-protocols xcb-proto xcb-util xcb-util-errors xcb-util-keysyms xcb-util-wm xorg-xinput xorg-xwayland
+```
+
+### CMake Install 
+```
+git clone --recursive https://github.com/hyprwm/Hyprland
+cd Hyprland
+make all && sudo make install
+```
+
 ### Required Packages
 ```bash
 yay -S alacritty discord flameshot gparted nwg-look papirus-icon-theme pavucontrol pamixer rofi sddm-git thunar thunar-archive-plugin thunar-media-tags-plugin thunar-shares-plugin thunar-vcs-plugin thunar-volman
