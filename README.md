@@ -25,8 +25,23 @@ make all && sudo make install
 
 ### Required Packages
 ```bash
-yay -S alacritty discord flameshot gparted nwg-look papirus-icon-theme pavucontrol pamixer rofi sddm-git thunar thunar-archive-plugin thunar-media-tags-plugin thunar-shares-plugin thunar-vcs-plugin thunar-volman
+yay -S alacritty discord flameshot gparted google-chrome grimblast-git nwg-look pamixer papirus-icon-theme pavucontrol rsync rofi sddm-git thunar thunar-archive-plugin thunar-media-tags-plugin thunar-shares-plugin thunar-vcs-plugin thunar-volman
 ```
+
+## Build and Install of gBar
+1. Clone gBar
+    ```sh
+    git clone https://github.com/scorpion-26/gBar
+    ```
+2. Configure with meson
+    *All optional dependencies enabled*
+    ```bash
+    meson setup build
+    ```
+3. Build and install
+    ```bash
+    ninja -C build && sudo ninja -C build install
+    ```
 
 ### GParted Extra Dependencies
 ```bash
@@ -51,6 +66,14 @@ yay -S btrfs-progs exfatprogs e2fsprogs f2fs-tools dosfstools mtools jfsutils ut
     Current=sddm-astronaut-theme" | sudo tee /etc/sddm.conf
     ```
 
+### Final Copy All Configs
+
+```bash
+rsync -avP * ~/.config/
+rm LICENSE README.md
+```
+
 ## References
 - Official Hyprland GitHub: [Hyprland Installation](https://wiki.hyprland.org/Getting-Started/Installation/)
 - SDDM Theme GitHub: [sddm-astronaut-theme](https://github.com/Keyitdev/sddm-astronaut-theme)
+- gBar:[gBar](https://github.com/scorpion-26/gBar)
