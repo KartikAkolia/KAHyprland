@@ -27,7 +27,7 @@ make all && sudo make install
 
 ### Required Packages
 ```bash
-yay -S alacritty discord flameshot gparted google-chrome grimblast-git nwg-look pamixer papirus-icon-theme pavucontrol rsync rofi sddm-git thunar thunar-archive-plugin thunar-media-tags-plugin thunar-shares-plugin thunar-vcs-plugin thunar-volman
+yay -S alacritty discord flameshot gparted google-chrome grimblast-git nwg-look pamixer papirus-icon-theme pavucontrol rsync rofi sddm-git thunar thunar-archive-plugin thunar-media-tags-plugin thunar-shares-plugin thunar-vcs-plugin thunar-volman zoxide fzf swww
 ```
 
 ### Install Starship
@@ -38,9 +38,16 @@ curl -sS https://starship.rs/install.sh | sh
 ## Add the following to the end of `~/.bashrc`
 ```bash
 eval "$(starship init bash)"
+eval "$(zoxide init bash)"
+```
+
+## Prerequisites Packages Install Before gBar and Grimblast
+```bash
+yay -S wl-clipboard mailcap gtk-layer-shell glib2 glib2-devel
 ```
 
 ## Build and Install of gBar
+
 1. Clone gBar
     ```sh
     git clone https://github.com/scorpion-26/gBar
@@ -78,11 +85,12 @@ yay -S btrfs-progs exfatprogs e2fsprogs f2fs-tools dosfstools mtools jfsutils ut
     Current=sddm-astronaut-theme" | sudo tee /etc/sddm.conf
     ```
 
-### Final Copy All Configs
+## Final Copy All Configs
 
 ```bash
 rsync -avP * ~/.config/
-rm LICENSE README.md
+rm ~/.config/LICENSE
+rm ~/.config/README.md
 ```
 
 ## References
