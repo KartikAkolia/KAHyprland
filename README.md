@@ -28,6 +28,16 @@ make all && sudo make install
 yay -S alacritty discord flameshot gparted google-chrome grimblast-git nwg-look pamixer papirus-icon-theme pavucontrol rsync rofi sddm-git thunar thunar-archive-plugin thunar-media-tags-plugin thunar-shares-plugin thunar-vcs-plugin thunar-volman
 ```
 
+### Install Starship
+```bash
+curl -sS https://starship.rs/install.sh | sh
+```
+
+## Add the following to the end of `~/.bashrc`
+```bash
+eval "$(starship init bash)"
+```
+
 ## Build and Install of gBar
 1. Clone gBar
     ```sh
@@ -74,6 +84,10 @@ rm LICENSE README.md
 ```
 
 ## References
+- ChrisTitusTech:[Hyprland Titus] (https://github.com/ChrisTitusTech/hyprland-titus)
+- ChrisTitusTech MyBash:[ChrisTitusTech MyBash] (https://github.com/ChrisTitusTech/mybash) 
 - Official Hyprland GitHub: [Hyprland Installation](https://wiki.hyprland.org/Getting-Started/Installation/)
 - SDDM Theme GitHub: [sddm-astronaut-theme](https://github.com/Keyitdev/sddm-astronaut-theme)
 - gBar:[gBar](https://github.com/scorpion-26/gBar)
+
+
