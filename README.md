@@ -2,9 +2,12 @@
 
 ## Installation
 
-Ensure base-devel is installed before proceeding
-
-### Paru
+### Yay
+```
+git clone git clone https://aur.archlinux.org/yay-bin.git
+cd yay-bin
+makepkg -si
+```
 
 **Important**: Execute the following commands as a regular user, NOT as root!
 
@@ -17,7 +20,7 @@ makepkg -si
 ### Required Packages
 
 ``` bash
-paru -S hyprland mate-polkit ffmpeg neovim viewnior rofi pavucontrol thunar starship wl-clipboard wf-recorder swww grimblast-git ffmpegthumbnailer tumbler playerctl noise-suppression-for-voice thunar-archive-plugin alacritty aylurs-gtk-shell wlogout sddm pamixer nwg-look nordic-theme papirus-icon-theme dunst noto-fonts noto-fonts-emoji brightnessctl hyprpicker-git hyprlock
+yay -S thunar thunar-archive-plugin thunar-media-tags-plugin thunar-shares-plugin thunar-vcs-plugin thunar-volman rofi discord gparted alacritty flameshot
 '''
 
 ## References
