@@ -1,5 +1,8 @@
 # Hyprland Configuration Files by Kartik
 
+![Screenshot](https://github.com/KartikAkolia/KAHyprland/blob/main/desktop.png)
+
+
 ## Installation
 
 **Important**: Execute the following commands as a regular user, NOT as root!
