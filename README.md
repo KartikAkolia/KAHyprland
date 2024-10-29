@@ -13,7 +13,7 @@ makepkg -si
 
 ### Required Packages
 ```bash
-yay -S alacritty discord flameshot gparted nwg-look papirus-icon-theme pavucontrol pamixer rofi sddm-git thunar thunar-archive-plugin thunar-media-tags-plugin thunar-shares-plugin thunar-vcs-plugin thunar-volman
+yay -S alacritty discord flameshot gparted gvfs nwg-look papirus-icon-theme pavucontrol pamixer rofi sddm-git thunar thunar-archive-plugin thunar-media-tags-plugin thunar-shares-plugin thunar-vcs-plugin thunar-volman
 ```
 
 ### GParted Extra Dependencies
