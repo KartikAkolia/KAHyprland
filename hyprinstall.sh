@@ -10,34 +10,90 @@ LOG="install.log"
 # Set the script to exit on error
 set -e
 
-printf "$(tput setaf 2) Welcome to the Arch Linux Hyprland setup script!\n $(tput sgr0)"
-sleep 2
+printf "$(tput setaf 2) Welcome to the Arch Linux Hyprland installer!\n $(tput sgr0)"
 
-printf "$YELLOW Please backup your files before proceeding, as this script will modify system files.\n"
-sleep 2
+# Function to check and install dependencies
+install_dependencies() {
+    local dependencies=("$@")  # Accepts a list of dependencies as arguments
 
-# Function to print error messages
-print_error() {
-    printf " %s%s\n" "$RED" "$1" >&2
+    for pkg in "${dependencies[@]}"; do
+        # Check if it's an AUR package
+        if [[ "$pkg" =~ ^[a-zA-Z0-9_-]+-git$ ]] || [[ "$pkg" == "yay" ]]; then
+            # Check if yay or paru is installed
+            if command -v yay &> /dev/null; then
+                aur_helper="yay"
+            elif command -v paru &> /dev/null; then
+                aur_helper="paru"
+            else
+                echo "Neither yay nor paru found. Installing yay..."
+                git clone https://aur.archlinux.org/yay-bin.git
+                cd yay-bin
+                makepkg -si --noconfirm
+                cd ..
+                rm -rf yay-bin
+                aur_helper="yay"
+            fi
+
+            # Install the AUR package if not already installed
+            if ! $aur_helper -Qi "$pkg" &> /dev/null; then
+                print_error "$pkg not found. Installing $pkg..."
+                $aur_helper -S --noconfirm "$pkg" || {
+                    print_error "Failed to install $pkg"
+                    exit 1
+                }
+            else
+                print_success "$pkg is already installed. Skipping installation."
+            fi
+
+        else
+            # Otherwise, it's a pacman package
+            if ! pacman -Qi "$pkg" &> /dev/null; then
+                print_error "$pkg not found. Installing $pkg..."
+                sudo pacman -Sy --noconfirm "$pkg" || {
+                    print_error "Failed to install $pkg"
+                    exit 1
+                }
+            else
+                print_success "$pkg is already installed. Skipping installation."
+            fi
+        fi
+    done
 }
 
-# Function to print success messages
-print_success() {
-    printf "%s%s%s\n" "$GREEN" "$1"
-}
+### Install Required Packages ###
+read -n1 -rep "${CAT} Install required packages from README.md? (y/n)" inst_pkgs
+if [[ $inst_pkgs =~ ^[Yy]$ ]]; then
+    required_pkgs=("alacritty" "discord" "flameshot" "gparted" "google-chrome" "grimblast-git" \
+                   "nwg-look" "pamixer" "papirus-icon-theme" "pavucontrol" "rsync" "rofi" "sddm-git" \
+                   "thunar" "thunar-archive-plugin" "thunar-media-tags-plugin" "thunar-shares-plugin" \
+                   "thunar-vcs-plugin" "thunar-volman" "zoxide" "fzf" "swww" "unzip" "p7zip")
+    install_dependencies "${required_pkgs[@]}"
+fi
 
-### Install Yay ###
-read -n1 -rep "${CAT} Install Yay (AUR helper)? (y/n)" inst_yay
-if [[ $inst_yay =~ ^[Yy]$ ]]; then
-    if ! command -v yay &> /dev/null; then
-        printf "${CAT} Cloning Yay repository...\n"
-        git clone https://aur.archlinux.org/yay-bin.git && cd yay-bin
-        makepkg -si
-        cd ..
-        rm -rf yay-bin
-    else
-        print_success "Yay is already installed."
-    fi
+### Install Hyprland Dependencies ###
+read -n1 -rep "${CAT} Install Hyprland dependencies? (y/n)" inst_hypr
+if [[ $inst_hypr =~ ^[Yy]$ ]]; then
+    hyprland_dependencies=("aquamarine" "gdb" "hyprcursor" "hyprlang" "hyprutils-git" \
+                           "hyprwayland-scanner" "libdisplay-info" "libfixes" "libinput" \
+                           "libliftoff" "libxcb" "libxcomposite" "libxkbcommon" "libxrender" \
+                           "meson" "ninja" "pango" "pixman" "seatd" "tomlplusplus" \
+                           "wayland-protocols" "xcb-proto" "xcb-util" "xcb-util-errors" \
+                           "xcb-util-keysyms" "xcb-util-wm" "xorg-xinput" "xorg-xwayland")
+    install_dependencies "${hyprland_dependencies[@]}"
+fi
+
+### Install CMake and Build Hyprland ###
+read -n1 -rep "${CAT} Install CMake and build Hyprland? (y/n)" inst_cmake
+if [[ $inst_cmake =~ ^[Yy]$ ]]; then
+    build_tools=("cmake" "make" "git")
+    install_dependencies "${build_tools[@]}"
+
+    # Build Hyprland
+    git clone --recursive https://github.com/hyprwm/Hyprland
+    cd Hyprland
+    make all && sudo make install
+    cd ..
+    rm -rf Hyprland
 fi
 
 ### Install Fonts ###
@@ -46,17 +102,6 @@ if [[ $inst_fonts =~ ^[Yy]$ ]]; then
     FONT_DIR="$HOME/.local/share/fonts"
     FONT_ZIP="$FONT_DIR/Meslo.zip"
     FONT_URL="https://github.com/ryanoasis/nerd-fonts/releases/download/v3.2.1/Meslo.zip"
-
-    # Check and install required packages if not already installed
-    for pkg in fontconfig wget unzip; do
-        if ! command -v $pkg &> /dev/null; then
-            print_error "$pkg not found. Installing $pkg..."
-            sudo pacman -Sy --noconfirm $pkg || {
-                print_error "Failed to install $pkg"
-                exit 1
-            }
-        fi
-    done
 
     # Check if Meslo Nerd-font is already installed
     if fc-list | grep -qi "Meslo"; then
@@ -77,8 +122,6 @@ if [[ $inst_fonts =~ ^[Yy]$ ]]; then
         print_success "Meslo Nerd-fonts installed successfully."
     fi
 fi
-
-
 
 ### Install Required Packages ###
 read -n1 -rep "${CAT} Install required packages from README.md? (y/n)" inst_pkgs
