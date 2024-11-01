@@ -1,6 +1,3 @@
-Sure! Here’s a revised version of your `README.md` file with improved formatting and consistency:
-
-```markdown
 # Hyprland Configuration Files by Kartik
 
 ![Screenshot](https://github.com/KartikAkolia/KAHyprland/blob/main/desktop.png)
