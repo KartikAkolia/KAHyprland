@@ -76,14 +76,6 @@ install_dependencies() {
 base_dependencies=("git" "wget" "unzip")
 install_dependencies "${base_dependencies[@]}"
 
-# Check for libfixes specifically
-if ! pacman -Qi "libfixes" &> /dev/null; then
-    print_error "libfixes not found. Please check if it's available in the repositories or AUR."
-    # Here you might consider prompting the user to install it manually if it's not available.
-else
-    print_success "libfixes is already installed."
-fi
-
 printf "$(tput setaf 2) Welcome to the Arch Linux Hyprland installer!\n $(tput sgr0)"
 
 ### Install Required Packages ###
