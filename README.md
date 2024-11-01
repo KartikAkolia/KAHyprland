@@ -19,6 +19,23 @@ cd yay-bin
 makepkg -si
 ```
 
+### Installing Fonts
+
+```bash
+mkdir -p ~/.local/share/fonts
+wget https://github.com/ryanoasis/nerd-fonts/releases/download/v3.2.1/Meslo.zip
+7z x Melso.zip
+```
+
+### Required Packages
+
+```bash
+yay -S alacritty discord flameshot gparted google-chrome grimblast-git \
+nwg-look pamixer papirus-icon-theme pavucontrol rsync rofi sddm-git \
+thunar thunar-archive-plugin thunar-media-tags-plugin thunar-shares-plugin \
+thunar-vcs-plugin thunar-volman zoxide fzf swww unzip p7zip
+```
+
 ### Install Hyprland Dependencies
 
 ```bash
@@ -35,15 +52,6 @@ xcb-util-wm xorg-xinput xorg-xwayland
 git clone --recursive https://github.com/hyprwm/Hyprland
 cd Hyprland
 make all && sudo make install
-```
-
-### Required Packages
-
-```bash
-yay -S alacritty discord flameshot gparted google-chrome grimblast-git \
-nwgl-look pamixer papirus-icon-theme pavucontrol rsync rofi sddm-git \
-thunar thunar-archive-plugin thunar-media-tags-plugin thunar-shares-plugin \
-thunar-vcs-plugin thunar-volman zoxide fzf swww
 ```
 
 ### Install Starship
@@ -124,7 +132,6 @@ rm ~/.config/README.md
 ```
 
 ## References
-
 ```
 - ChrisTitusTech: [Hyprland Titus](https://github.com/ChrisTitusTech/hyprland-titus)
 - ChrisTitusTech: [MyBash](https://github.com/ChrisTitusTech/mybash)
