@@ -47,6 +47,24 @@ if [[ $inst_fonts =~ ^[Yy]$ ]]; then
     FONT_ZIP="$FONT_DIR/Meslo.zip"
     FONT_URL="https://github.com/ryanoasis/nerd-fonts/releases/download/v3.2.1/Meslo.zip"
 
+    # Check and install fontconfig and wget if not already installed
+    if ! command -v fc-list &> /dev/null; then
+        print_error "fontconfig (for fc-list) not found. Installing fontconfig..."
+        sudo pacman -Sy --noconfirm fontconfig || {
+            print_error "Failed to install fontconfig"
+            exit 1
+        }
+    fi
+
+    if ! command -v wget &> /dev/null; then
+        print_error "wget not found. Installing wget..."
+        sudo pacman -Sy --noconfirm wget || {
+            print_error "Failed to install wget"
+            exit 1
+        }
+    fi
+
+    # Check if Meslo Nerd-font is already installed
     if fc-list | grep -qi "Meslo"; then
         print_success "Meslo Nerd-fonts are already installed."
     else
@@ -65,6 +83,7 @@ if [[ $inst_fonts =~ ^[Yy]$ ]]; then
         print_success "Meslo Nerd-fonts installed successfully."
     fi
 fi
+
 
 ### Install Required Packages ###
 read -n1 -rep "${CAT} Install required packages from README.md? (y/n)" inst_pkgs
