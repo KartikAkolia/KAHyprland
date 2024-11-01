@@ -4,8 +4,8 @@
 
 ## Installation
 
-**Important**: Note show_keybinds.sh needs to be executable and in the home directory.
-**Important**: You don't have to have modify the hyprland.conf!!!
+**Important**: Note show_keybinds.sh needs to be executable and in the home directory.  
+You don't have to have modify the hyprland.conf!!!
 
 ```bash
 chmod +x show_keybinds.sh
