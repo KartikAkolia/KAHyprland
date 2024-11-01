@@ -45,10 +45,12 @@ install_dependencies() {
             # Install the AUR package if not already installed
             if ! $aur_helper -Qi "$pkg" &> /dev/null; then
                 print_error "$pkg not found. Installing $pkg..."
-                $aur_helper -S --noconfirm "$pkg" || {
-                    print_error "Failed to install $pkg"
-                    exit 1
-                }
+                if ! $aur_helper -S --noconfirm "$pkg"; then
+                    print_error "Failed to install $pkg. Please resolve conflicts and press any key to continue..."
+                    read -n1 -s -r -p "Press any key to continue after resolving conflicts..."
+                    # Pause before retrying
+                    sleep 5
+                fi
             else
                 print_success "$pkg is already installed. Skipping installation."
             fi
@@ -57,10 +59,12 @@ install_dependencies() {
             # Otherwise, it's a pacman package
             if ! pacman -Qi "$pkg" &> /dev/null; then
                 print_error "$pkg not found. Installing $pkg..."
-                sudo pacman -Sy --noconfirm "$pkg" || {
-                    print_error "Failed to install $pkg"
-                    exit 1
-                }
+                if ! sudo pacman -Sy --noconfirm "$pkg"; then
+                    print_error "Failed to install $pkg. Please resolve conflicts and press any key to continue..."
+                    read -n1 -s -r -p "Press any key to continue after resolving conflicts..."
+                    # Pause before retrying
+                    sleep 5
+                fi
             else
                 print_success "$pkg is already installed. Skipping installation."
             fi
@@ -139,4 +143,3 @@ fi
 
 # Script completion
 printf "\n${GREEN} Installation Completed.\n"
-
