@@ -128,6 +128,7 @@ rm ~/.config/README.md
 
 ## References
 
+```
 - ChrisTitusTech: [Hyprland Titus](https://github.com/ChrisTitusTech/hyprland-titus)
 - ChrisTitusTech: [MyBash](https://github.com/ChrisTitusTech/mybash)
 - Official Hyprland GitHub: [Hyprland Installation](https://wiki.hyprland.org/Getting-Started/Installation/)
