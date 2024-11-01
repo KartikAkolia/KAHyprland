@@ -57,7 +57,7 @@ install_package() {
 }
 
 # Check and install global dependencies
-global_dependencies=("wget" "unzip" "fc-list")
+global_dependencies=("wget" "unzip" "fc-list" "fontconfig")
 for pkg in "${global_dependencies[@]}"; do
     if ! pacman -Qi "$pkg" &> /dev/null; then
         print_error "$pkg not found. Installing $pkg..."
