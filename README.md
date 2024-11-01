@@ -84,11 +84,13 @@ yay -S btrfs-progs exfatprogs e2fsprogs f2fs-tools dosfstools mtools jfsutils ut
     ```bash
     echo "[Autologin]
     User=$USER
-    Session=dwm
+    Session=Hyprland
 
     [Theme]
     Current=sddm-astronaut-theme" | sudo tee /etc/sddm.conf
     ```
+
+**Please change the $USER to your username**
 
 ## Final Copy All Configs
 
