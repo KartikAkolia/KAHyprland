@@ -83,7 +83,7 @@ yay -S btrfs-progs exfatprogs e2fsprogs f2fs-tools dosfstools mtools jfsutils ut
 2. Then edit `/etc/sddm.conf`, so that it looks like this:
     ```bash
     echo "[Autologin]
-    User=kartik
+    User=$USER
     Session=dwm
 
     [Theme]
