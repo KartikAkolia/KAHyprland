@@ -55,6 +55,7 @@ if [[ $inst =~ ^[Nn]$ ]]; then
 fi
 
 if [[ $inst =~ ^[Yy]$ ]]; then
+    # Define packages based on the README.md structure
     git_pkgs="grimblast-git hyprpicker-git aylurs-gtk-shell"
     hypr_pkgs="hyprland wl-clipboard wf-recorder rofi sddm wlogout dunst swww alacritty hyprcursor hyprlang noto-fonts noto-fonts-emoji"
     app_pkgs="nwg-look qt5ct btop jq gvfs ffmpegthumbs mpv playerctl pamixer noise-suppression-for-voice"
@@ -191,7 +192,7 @@ else
     printf "${YELLOW} No Bluetooth packages installed..\n"
 fi
 
-### Script is done ###
+### Finish ###
 printf "\n${GREEN} Installation Completed.\n"
 echo -e "${GREEN} You can start Hyprland by typing Hyprland (note the capital H).\n"
 read -n1 -rep "${CAT} Would you like to start Hyprland now? (y,n)" HYP
