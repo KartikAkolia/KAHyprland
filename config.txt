@@ -1,0 +1,66 @@
+# Keybindings (dwm-like) for i3
+
+set $mod Mod4  # This sets the Mod key to Super (Windows key)
+
+# Launch Programs
+bindsym $mod+r exec --no-startup-id $launchercmd  # Example: 'rofi' or your custom launcher
+bindsym $mod+Control+r exec --no-startup-id protonrestart  # Restart Proton (replace with your script/command)
+bindsym $mod+x exec --no-startup-id $termcmd  # Launch terminal (set your terminal command)
+bindsym $mod+b exec --no-startup-id xdg-open https://  # Open a browser (replace URL with custom)
+bindsym $mod+p exec --no-startup-id flameshot full -p /media/drive/Screenshots/  # Take screenshot
+bindsym $mod+Shift+p exec --no-startup-id flameshot gui -p /media/drive/Screenshots/  # Screenshot (GUI mode)
+bindsym $mod+Control+p exec --no-startup-id flameshot gui --clipboard  # Screenshot to clipboard
+bindsym $mod+e exec --no-startup-id xdg-open .  # Open file manager (set your default)
+bindsym $mod+w exec --no-startup-id looking-glass-client -F  # Start Looking Glass Client (replace as needed)
+bindsym $mod+Shift+w exec --no-startup-id feh --randomize --bg-fill ~/Pictures/backgrounds/*  # Random wallpaper
+bindsym $mod+Shift+b bar toggle  # Toggle the i3bar visibility
+
+# Window Management (focus, move stack, etc.)
+bindsym $mod+j focus up  # Focus next window (down in stack)
+bindsym $mod+k focus down  # Focus previous window (up in stack)
+bindsym $mod+Shift+j move up  # Move window in stack up
+bindsym $mod+Shift+k move down  # Move window in stack down
+
+# Layout Management
+bindsym $mod+i exec --no-startup-id incnmaster  # Increase number of master windows
+bindsym $mod+d exec --no-startup-id incnmaster  # Decrease number of master windows
+bindsym $mod+h exec --no-startup-id setmfact -0.05  # Shrink master window area
+bindsym $mod+l exec --no-startup-id setmfact +0.05  # Grow master window area
+bindsym $mod+Shift+h exec --no-startup-id setcfact +0.25  # Increase client area in tile
+bindsym $mod+Shift+l exec --no-startup-id setcfact -0.25  # Decrease client area in tile
+bindsym $mod+Shift+o exec --no-startup-id setcfact 0.00  # Reset client area
+
+# Window Actions
+bindsym $mod+Return exec --no-startup-id zoom  # Focus and zoom in on window
+bindsym $mod+Tab view  # Switch to last window
+bindsym $mod+q kill  # Kill focused window
+bindsym $mod+t setlayout tabbed  # Tabbed layout
+bindsym $mod+f setlayout splitv  # Split layout (vertical)
+bindsym $mod+m fullscreen  # Toggle fullscreen mode
+bindsym $mod+space setlayout toggle  # Toggle between layouts
+bindsym $mod+Shift+m togglefloating  # Toggle floating mode
+
+# Monitor and Workspace Management
+bindsym $mod+0 view  # View all workspaces
+bindsym $mod+comma focusmon -1  # Focus previous monitor
+bindsym $mod+period focusmon +1  # Focus next monitor
+bindsym $mod+Shift+comma tagmon -1  # Move window to previous monitor
+bindsym $mod+Shift+period tagmon +1  # Move window to next monitor
+
+# Workspace Shortcuts (tag keys)
+bindsym $mod+1 workspace 1
+bindsym $mod+2 workspace 2
+bindsym $mod+3 workspace 3
+bindsym $mod+4 workspace 4
+bindsym $mod+5 workspace 5
+bindsym $mod+6 workspace 6
+bindsym $mod+7 workspace 7
+bindsym $mod+8 workspace 8
+bindsym $mod+9 workspace 9
+bindsym $mod+0 workspace 10
+
+# Quit, Reboot, Suspend
+bindsym $mod+Shift+q quit  # Quit i3
+bindsym $mod+Control+q exec --no-startup-id $HOME/.config/rofi/powermenu.sh  # Show power menu
+bindsym $mod+Control+Shift+r exec --no-startup-id systemctl reboot  # Reboot system
+bindsym $mod+Control+Shift+s exec --no-startup-id systemctl suspend  # Suspend system
